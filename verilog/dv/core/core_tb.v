@@ -156,15 +156,36 @@ module core_tb;
 
 	initial begin
 		$dumpfile("core.vcd");
-		$dumpvars(1, core_tb);
-		$dumpvars(0, core_tb.uut.mprj);
+		$dumpvars(0, core_tb);
+		
+        //$dumpvars(0, core_tb.uut.mprj.user_clock2);
+		//$dumpvars(0, core_tb.uut.mprj.wb_rst_i);
+		//$dumpvars(0, core_tb.uut.mprj.coreRst);
+		//$dumpvars(0, core_tb.uut.mprj.en);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_SPI_mosi);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_SPI_clk);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_SPI_cs);
+		
+        //$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[0]);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[1]);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[2]);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[3]);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[4]);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[5]);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[6]);
+		//$dumpvars(0, core_tb.uut.mprj.CORE_instrReadAddr[7]);
+        //$dumpvars(0, core_tb.uut.mprj.user_clock2);
+        //$dumpvars(0, core_tb.uut.mprj.io_in);
+        //$dumpvars(0, core_tb.uut.mprj.io_oeb);
+        //$dumpvars(0, core_tb.uut.mprj.io_out);
+        //$dumpvars(0, core_tb.uut.mprj.\core.aguLD.rst);
         
         $dumpoff;
-        repeat (65535) @(posedge clock);
+        repeat (65536) @(posedge clock);
         $dumpon;
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (64) begin
+		repeat (8) begin
 			repeat (1000) @(posedge clock);
 			// $display("+1000 cycles");
 		end
@@ -178,6 +199,7 @@ module core_tb;
 		$finish;
 	end
 
+
 	initial begin
 		RSTB <= 1'b0;
 		CSB  <= 1'b1;		// Force CSB high
@@ -188,22 +210,28 @@ module core_tb;
 	end
 
 	initial begin		// Power-up sequence
-		power1 <= 1'b0;
-		power2 <= 1'b0;
-		#200;
-		power1 <= 1'b1;
-		#200;
-		power2 <= 1'b1;
+		power1 = 1'b0;
+		power2 = 1'b0;
+		power3 = 1'b0;
+		power4 = 1'b0;
+		#100;
+		power1 = 1'b1;
+		#100;
+		power2 = 1'b1;
+		#100;
+		power3 = 1'b1;
+		#100;
+		power4 = 1'b1;
 	end
 
-    initial begin		// Power-up sequence
+    /*initial begin		// Power-up sequence
 		power3 <= 1'b0;
 		power4 <= 1'b0;
 		#200;
 		power3 <= 1'b1;
 		#200;
 		power4 <= 1'b1;
-	end
+	end*/
 
 
 	wire flash_csb;
@@ -219,24 +247,20 @@ module core_tb;
 
 	caravel uut (
 		.vddio	  (VDD3V3),
-		.vddio_2  (VDD3V3),
 		.vssio	  (VSS),
-		.vssio_2  (VSS),
 		.vdda	  (VDD3V3),
 		.vssa	  (VSS),
 		.vccd	  (VDD1V8),
 		.vssd	  (VSS),
-		.vdda1    (VDD3V3),
-		.vdda1_2  (VDD3V3),
-		.vdda2    (VDD3V3),
+		.vdda1    (USER_VDD3V3),
+		.vdda2    (USER_VDD3V3),
 		.vssa1	  (VSS),
-		.vssa1_2  (VSS),
 		.vssa2	  (VSS),
-		.vccd1	  (VDD1V8),
-		.vccd2	  (VDD1V8),
+		.vccd1	  (USER_VDD1V8),
+		.vccd2	  (USER_VDD1V8),
 		.vssd1	  (VSS),
 		.vssd2	  (VSS),
-		.clock    (clock),
+		.clock	  (clock),
 		.gpio     (gpio),
 		.mprj_io  (mprj_io),
 		.flash_csb(flash_csb),

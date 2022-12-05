@@ -161,7 +161,7 @@ module primes_tb;
         repeat (65535) @(posedge clock);
         $dumpon;
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (512) begin
+		repeat (1024) begin
 			repeat (1000) @(posedge clock);
 			// $display("+1000 cycles");
 		end

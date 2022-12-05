@@ -54,4 +54,4 @@
 -v $(USER_PROJECT_VERILOG)/rtl/hardfloat/HardFloat_rawFN.v
 -v $(USER_PROJECT_VERILOG)/rtl/hardfloat/isSigNaNRecFN.v
 -v $(USER_PROJECT_VERILOG)/rtl/hardfloat/iNToRecFN.v   
--v $(USER_PROJECT_VERILOG)/rtl/hardfloat/divSqrtRecFN_small.v   
+-v $(USER_PROJECT_VERILOG)/rtl/hardfloat/divSqrtRecFN_small.v

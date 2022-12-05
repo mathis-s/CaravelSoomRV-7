@@ -48,8 +48,13 @@ module TageTable (
 			for (i = 0; i < SIZE; i = i + 1)
 				if (entries[i][USF_SIZE + (CNT_SIZE - 1)-:((USF_SIZE + (CNT_SIZE - 1)) >= (CNT_SIZE + 0) ? ((USF_SIZE + (CNT_SIZE - 1)) - (CNT_SIZE + 0)) + 1 : ((CNT_SIZE + 0) - (USF_SIZE + (CNT_SIZE - 1))) + 1)] != 0)
 					entries[i][USF_SIZE + (CNT_SIZE - 1)-:((USF_SIZE + (CNT_SIZE - 1)) >= (CNT_SIZE + 0) ? ((USF_SIZE + (CNT_SIZE - 1)) - (CNT_SIZE + 0)) + 1 : ((CNT_SIZE + 0) - (USF_SIZE + (CNT_SIZE - 1))) + 1)] <= entries[i][USF_SIZE + (CNT_SIZE - 1)-:((USF_SIZE + (CNT_SIZE - 1)) >= (CNT_SIZE + 0) ? ((USF_SIZE + (CNT_SIZE - 1)) - (CNT_SIZE + 0)) + 1 : ((CNT_SIZE + 0) - (USF_SIZE + (CNT_SIZE - 1))) + 1)] - 1;
-		if (rst)
+		if (rst) begin
 			decrCnt <= 0;
+`ifdef __ICARUS__
+            for (i = 0; i < SIZE; i = i + 1)
+                entries[i] <= 0;
+`endif
+        end
 		else if (IN_writeValid)
 			if (IN_writeUpdate) begin
 				if (IN_writeTaken && (entries[IN_writeAddr][CNT_SIZE - 1-:CNT_SIZE] != {CNT_SIZE {1'b1}}))

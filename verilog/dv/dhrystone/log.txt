@@ -1,0 +1,56 @@
+vvp  dhrystone.vvp
+WARNING: /home/m/Builds/caravel_user_project-mpw-7h/verilog/rtl/ExternalMemorySim.v:22: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+WARNING: /home/m/Builds/caravel_user_project-mpw-7h/verilog/rtl/ExternalMemorySim.v:22: $readmemh(program.hex): Not enough words in the file for the requested range [0:1048575].
+First instruction: 01200513
+Reading dhrystone.hex
+dhrystone.hex loaded into memory
+Memory 5 bytes = 0x6f 0x00 0x00 0x0b 0x13
+FST info: dumpfile dhrystone.vcd opened for output.
+
+Dhrystone Benchmark, Version 2.1 (Language: C)
+
+Program compiled without 'register' attribute
+
+Please give the number of runs through the benchmark: 
+Execution starts, %d runs through Dhrystone
+Execution ends
+
+Final values of the variables used in the benchmark:
+
+Int_Glob:            00000005
+Bool_Glob:           00000001
+Ch_1_Glob:           00000041
+Ch_2_Glob:           00000042
+Arr_1_Glob[8]:       00000007
+Arr_2_Glob[8][7]:    000000d2
+Ptr_Glob->Ptr_Comp:          0001f000
+  Discr:             00000000
+  Enum_Comp:         00000002
+  Int_Comp:          00000011
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+Next_Ptr_Glob->Ptr_Comp:          0001f000
+  Discr:             00000000
+  Enum_Comp:         00000001
+  Int_Comp:          00000012
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+        should be:   DHRYSTONE PROGRAM, SOME STRING
+Int_1_Loc:           00000005
+Int_2_Loc:           0000000d
+Int_3_Loc:           00000007
+Enum_Loc:            00000001
+Str_1_Loc:           DHRYSTONE PROGRAM, 1'ST STRING
+        should be:   DHRYSTONE PROGRAM, 1'ST STRING
+Str_2_Loc:           DHRYSTONE PROGRAM, 2'ND STRING
+        should be:   DHRYSTONE PROGRAM, 2'ND STRING
+
+
+RESULTS
+Runtime (cycles) 12585
+Executed (instrs) 28477
+Decoded (instrs) 41454
+mIPC 2262
+mDMIPS/MHz 9090
+Monitor: Mega-Project WB (RTL) Passed
+dhrystone_tb.v:199: $finish called at 7772130000 (1ps)
+mv dhrystone.vcd RTL-dhrystone.vcd
+rm dhrystone.vvp

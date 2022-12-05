@@ -20,7 +20,12 @@ module ReturnStack (
 	reg [$clog2(NUM_ENTRIES):0] numFilled;
 	always @(*) begin
 		OUT_valid = numFilled != 0;
+`ifdef __ICARUS__
+		OUT_data = stack[index - 3'b1];
+`else
 		OUT_data = stack[index - 1];
+`endif
+
 	end
 	always @(posedge clk)
 		if (rst) begin
